@@ -16,7 +16,7 @@ type User {
 
 extend type Query {
   users: [User!]
-  currentUser: User
+  currentUser: User @isAuthenticated
 }
 
 extend type Mutation {

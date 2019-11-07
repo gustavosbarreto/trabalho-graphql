@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
+import { AuthDirective } from 'graphql-directive-auth';
 import { ApolloServer } from 'apollo-server';
 
 import schema from './schema';
@@ -18,15 +19,31 @@ const getUser = async token => {
   }
 };
 
+const customAuth = AuthDirective({
+    authenticateFunc: (ctx) => {
+	if (!ctx.user) {
+	    return false;
+	}
+	
+	return true;
+    },
+
+    checkRoleFunc: () => {
+    }
+});
+
 const server = new ApolloServer({
     introspection: true,
     playground: true,
     typeDefs: schema,
     resolvers,
-    context: ({ req }) => {
+    schemaDirectives: {
+	...customAuth
+    },
+    context: async ({ req }) => {
 	const tokenWithBearer = req.headers.authorization || ''
 	const token = tokenWithBearer.split(' ')[1]
-	const user = getUser(token)
+	const user = await getUser(token)
 
 	return {
 	    models,
