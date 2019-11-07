@@ -12,10 +12,11 @@ type User {
   email: String!
   password: String!
   role: Role
+  timeRegistries: [TimeRegistry!]!
 }
 
 extend type Query {
-  users: [User!]
+  users: [User!] @isAuthenticated @hasRole(role: "ADMIN")
   currentUser: User @isAuthenticated
 }
 

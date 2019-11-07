@@ -4,49 +4,55 @@ import bcrypt from 'bcrypt';
 import { AuthenticationError } from 'apollo-server';
 
 const createToken = async (user, secret, expiresIn) => {
-    const { id, email, role } = user;
+	const { id, email, role } = user;
 
-    return await jwt.sign({ id, email, role }, secret, {
-	expiresIn
-    });
+	return await jwt.sign({ id, email, role }, secret, {
+		expiresIn
+	});
 };
 
 export default {
-    Query: {
-	users: async(parent, args, { models }) => {
-	    return await models.User.findAll();
+	User: {
+		timeRegistries: async (parent, args, context, info) => {
+			return await parent.getTimeRegistries();
+		}
 	},
 
-	currentUser: async(parent, args, { models, user }) => {
-	    if (!user) {
-		return null
-	    }
+	Query: {
+		users: async (parent, args, { models }) => {
+			return await models.User.findAll();
+		},
 
-	    return await models.User.findById(user.id);
-	}
-    },
+		currentUser: async (parent, args, { models, user }) => {
+			if (!user) {
+				return null
+			}
 
-    Mutation: {
-	signUp: async (parent, { name, email, password }, { models }) => {
-	    const hashedPassword = await bcrypt.hash(password, 10);
-	    const user = await models.User.create({ name, email, password: hashedPassword, role: 'USER' });
-
-	    return { token: createToken(user, process.env.SECRET, '30d') }
+			return await models.User.findById(user.id);
+		}
 	},
 
-	signIn: async (parent, { email, password }, { models }) => {
-	    const user = await models.User.findByEmail(email)
+	Mutation: {
+		signUp: async (parent, { name, email, password }, { models }) => {
+			const hashedPassword = await bcrypt.hash(password, 10);
+			const user = await models.User.create({ name, email, password: hashedPassword, role: 'USER' });
 
-	    if (!user) {
-		throw new AuthenticationError('Authentication failed');
-	    }
+			return { token: createToken(user, process.env.SECRET, '30d') }
+		},
 
-	    const passwordMatch = await bcrypt.compare(password, user.password);
-	    if (!passwordMatch) {
-		throw new AuthenticationError('Authentication failed');
-	    }
+		signIn: async (parent, { email, password }, { models }) => {
+			const user = await models.User.findByEmail(email)
 
-	    return { token: createToken(user, process.env.SECRET, '30d') }
+			if (!user) {
+				throw new AuthenticationError('Authentication failed');
+			}
+
+			const passwordMatch = await bcrypt.compare(password, user.password);
+			if (!passwordMatch) {
+				throw new AuthenticationError('Authentication failed');
+			}
+
+			return { token: createToken(user, process.env.SECRET, '30d') }
+		}
 	}
-    }
 }

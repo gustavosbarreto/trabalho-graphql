@@ -7,7 +7,8 @@ let sequelize = new Sequelize({
 });
 
 const models = {
-    User: sequelize.import('./user')
+    User: sequelize.import('./user'),
+    TimeRegistry: sequelize.import('./time_registry')
 };
 
 export { sequelize }
