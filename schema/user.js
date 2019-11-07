@@ -16,5 +16,15 @@ type User {
 
 extend type Query {
   users: [User!]
+  currentUser: User
+}
+
+extend type Mutation {
+  signUp(name: String!, email: String!, password: String!): Token!
+  signIn(email: String!, password: String!): Token!
+}
+
+type Token {
+  token: String!
 }
 `
