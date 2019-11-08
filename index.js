@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import { AuthDirective } from 'graphql-directive-auth';
-import { ForbiddenError, ApolloServer } from 'apollo-server';
+import { ForbiddenError, PubSub, ApolloServer } from 'apollo-server';
 
 import schema from './schema';
 import models, { sequelize } from './models';
@@ -18,6 +18,8 @@ const getUser = async token => {
     }
   }
 };
+
+const pubSub = new PubSub();
 
 const customAuth = AuthDirective({
   authenticateFunc: (ctx) => {
@@ -44,13 +46,22 @@ const server = new ApolloServer({
   schemaDirectives: {
     ...customAuth
   },
-  context: async ({ req }) => {
-    const tokenWithBearer = req.headers.authorization || ''
+  context: async ({ req, connection }) => {
+    let headers;
+
+    if (connection) {
+      headers = connection.context;
+    } else {
+      headers = req.headers;
+    }
+
+    const tokenWithBearer = headers.authorization || ''
     const token = tokenWithBearer.split(' ')[1]
     const user = await getUser(token)
 
     return {
       models,
+      pubSub,
       user
     }
   }

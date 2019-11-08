@@ -8,6 +8,10 @@ type TimeRegistry {
     createdAt: Date!
 }
 
+extend type Subscription {
+    timeRegistryCreated: TimeRegistry
+}
+
 extend type Query {
     timeRegistries: [TimeRegistry!] @isAuthenticated @hasRole(role: "ADMIN")
 }

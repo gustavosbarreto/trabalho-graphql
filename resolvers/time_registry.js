@@ -1,3 +1,5 @@
+import { EVENTS } from '../subscription';
+
 export default {
     TimeRegistry: {
         user: async (parent, args, context, info) => {
@@ -12,9 +14,16 @@ export default {
     },
 
     Mutation: {
-        createTimeRegistry: async (parent, { }, { models, user }) => {
+        createTimeRegistry: async (parent, args, { pubSub, models, user }) => {
             const timeRegistry = await models.TimeRegistry.create({ userId: user.id });
-            return timeRegistry.reload({ include: [models.User] });
+
+            await timeRegistry.reload({ include: [models.User] });
+
+            pubSub.publish(EVENTS.TIME_REGISTRY.CREATED, {
+                timeRegistryCreated: timeRegistry
+            });
+
+            return timeRegistry;
         },
 
         deleteTimeRegistry: async (parent, { id }, { models }) => {
@@ -22,5 +31,13 @@ export default {
             await timeRegistry.destroy();
             return true;
         }
-    }
+    },
+
+    Subscription: {
+        timeRegistryCreated: {
+            subscribe: (parent, args, { pubSub }) => {
+                return pubSub.asyncIterator(EVENTS.TIME_REGISTRY.CREATED);
+            }
+        },
+    },
 }
