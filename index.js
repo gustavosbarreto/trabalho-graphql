@@ -47,24 +47,30 @@ const server = new ApolloServer({
     ...customAuth
   },
   context: async ({ req, connection }) => {
-    let headers;
-
     if (connection) {
-      headers = connection.context;
+      return connection.context;
     } else {
-      headers = req.headers;
-    }
+      const tokenWithBearer = req.headers.authorization || ''
+      const token = tokenWithBearer.split(' ')[1]
+      const user = await getUser(token)
 
-    const tokenWithBearer = headers.authorization || ''
-    const token = tokenWithBearer.split(' ')[1]
-    const user = await getUser(token)
 
-    return {
-      models,
-      pubSub,
-      user
+      return {
+        models,
+        pubSub,
+        user
+      }
     }
-  }
+  },
+  subscriptions: {
+    onConnect: async (params, webSocket) => {
+      const tokenWithBearer = params.Authorization || '';
+      const token = tokenWithBearer.split(' ')[1];
+      const user = await getUser(token);
+
+      return { models, pubSub, user }
+    },
+  },
 });
 
 sequelize.sync().then(async () => {

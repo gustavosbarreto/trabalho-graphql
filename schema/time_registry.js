@@ -9,7 +9,7 @@ type TimeRegistry {
 }
 
 extend type Subscription {
-    timeRegistryCreated: TimeRegistry
+    timeRegistryCreated: TimeRegistry @isAuthenticated @hasRole(role: "ADMIN")
 }
 
 extend type Query {
