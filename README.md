@@ -48,7 +48,6 @@ docker run -e SECRET=mysecret -p 4000:4000 gustavosbarreto/trabalho-graphql
     * [Token](#token)
     * [User](#user)
   * [Enums](#enums)
-    * [CacheControlScope](#cachecontrolscope)
     * [Role](#role)
 
 </details>
