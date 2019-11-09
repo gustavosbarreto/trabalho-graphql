@@ -352,25 +352,6 @@ Batidas de pontos do usuário
 
 ## Enums
 
-### CacheControlScope
-
-<table>
-<thead>
-<th align="left">Value</th>
-<th align="left">Description</th>
-</thead>
-<tbody>
-<tr>
-<td valign="top"><strong>PUBLIC</strong></td>
-<td></td>
-</tr>
-<tr>
-<td valign="top"><strong>PRIVATE</strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
 ### Role
 
 Tipos de papéis de usuários
