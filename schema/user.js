@@ -23,7 +23,7 @@ type User {
   "Papel do usuário"
   role: Role
   "Batidas de pontos do usuário"
-  timeRegistries: [TimeRegistry!]!
+  timeEntries: [TimeEntry!]!
 }
 
 extend type Query {

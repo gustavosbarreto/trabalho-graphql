@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server');
 const user = require('./user');
-const timeRegistry = require('./time_registry');
+const timeEntry = require('./time_entry');
 
 const root = gql`
   directive @isAuthenticated on FIELD | FIELD_DEFINITION
@@ -21,4 +21,4 @@ const root = gql`
   }
 `
 
-export default [root, user, timeRegistry];
+export default [root, user, timeEntry];

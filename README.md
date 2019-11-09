@@ -43,7 +43,7 @@ $ docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
   * [Mutation](#mutation)
   * [Objects](#objects)
     * [Subscription](#subscription)
-    * [TimeRegistry](#timeregistry)
+    * [TimeEntry](#timeentry)
     * [Token](#token)
     * [User](#user)
   * [Enums](#enums)
@@ -90,8 +90,8 @@ Retorna o usuário corrente que está autenticado
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>timeRegistries</strong></td>
-<td valign="top">[<a href="#timeregistry">TimeRegistry</a>!]</td>
+<td colspan="2" valign="top"><strong>timeEntries</strong></td>
+<td valign="top">[<a href="#timeentry">TimeEntry</a>!]</td>
 <td>
 
 Query que retorna todas as batidades de pontos de todos usuários.
@@ -162,8 +162,8 @@ Mutation para login de usuários registrados
 <td></td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>createTimeRegistry</strong></td>
-<td valign="top"><a href="#timeregistry">TimeRegistry</a>!</td>
+<td colspan="2" valign="top"><strong>createTimeEntry</strong></td>
+<td valign="top"><a href="#timeentry">TimeEntry</a>!</td>
 <td>
 
 Efetua uma batida de ponto para o usuário corrente.
@@ -172,7 +172,7 @@ Note que somente usuários authenticados podem executar essa mutation
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>deleteTimeRegistry</strong></td>
+<td colspan="2" valign="top"><strong>deleteTimeEntry</strong></td>
 <td valign="top"><a href="#boolean">Boolean</a></td>
 <td>
 
@@ -209,8 +209,8 @@ Note que somente administradores podem executar essa mutation
 <td></td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>timeRegistryCreated</strong></td>
-<td valign="top"><a href="#timeregistry">TimeRegistry</a></td>
+<td colspan="2" valign="top"><strong>timeEntryCreated</strong></td>
+<td valign="top"><a href="#timeentry">TimeEntry</a></td>
 <td>
 
 Evento que é disparado quando uma batida é efetuada.
@@ -221,9 +221,9 @@ Note que somente administradores podem subscrever a este evento
 </tbody>
 </table>
 
-### TimeRegistry
+### TimeEntry
 
-TimeRegistry representa uma batida de ponto
+TimeEntry representa uma batida de ponto
 
 <table>
 <thead>
@@ -348,8 +348,8 @@ Papel do usuário
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>timeRegistries</strong></td>
-<td valign="top">[<a href="#timeregistry">TimeRegistry</a>!]!</td>
+<td colspan="2" valign="top"><strong>timeEntries</strong></td>
+<td valign="top">[<a href="#timeentry">TimeEntry</a>!]!</td>
 <td>
 
 Batidas de pontos do usuário

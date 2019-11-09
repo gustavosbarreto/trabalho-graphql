@@ -1,5 +1,5 @@
 import { Model } from 'sequelize';
-import { TimeRegistry } from './time_registry';
+import { TimeEntry } from './time_entry';
 
 
 export default (sequelize, DataTypes) => {
@@ -13,8 +13,8 @@ export default (sequelize, DataTypes) => {
     }, { sequelize });
 
     User.associate = models => {
-        User.hasMany(models.TimeRegistry);
-        models.TimeRegistry.belongsTo(User);
+        User.hasMany(models.TimeEntry);
+        models.TimeEntry.belongsTo(User);
     };
 
     User.findById = async id => {
@@ -25,9 +25,9 @@ export default (sequelize, DataTypes) => {
         return await User.findOne({ where: { email: email } });
     }
 
-    const TimeRegistry = sequelize.import('./time_registry');
+    const TimeEntry = sequelize.import('./time_entry');
 
-    User.associate({ TimeRegistry });
+    User.associate({ TimeEntry });
 
     return User;
 }

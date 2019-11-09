@@ -13,8 +13,8 @@ const createToken = async (user, secret, expiresIn) => {
 
 export default {
 	User: {
-		timeRegistries: async (parent, args, context, info) => {
-			return await parent.getTimeRegistries();
+		timeEntries: async (parent, args, context, info) => {
+			return await parent.getTimeEntries();
 		}
 	},
 

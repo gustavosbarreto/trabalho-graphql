@@ -1,4 +1,4 @@
 import user from './user';
-import timeRegistry from './time_registry';
+import timeEntry from './time_entry';
 
-export default [user, timeRegistry]
+export default [user, timeEntry]
