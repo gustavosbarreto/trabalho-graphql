@@ -19,7 +19,7 @@ export default {
 
             await timeEntry.reload({ include: [models.User] });
 
-            pubSub.publish(EVENTS.TIME_REGISTRY.CREATED, {
+            pubSub.publish(EVENTS.TIME_ENTRY.CREATED, {
                 timeEntryCreated: timeEntry
             });
 
@@ -36,7 +36,7 @@ export default {
     Subscription: {
         timeEntryCreated: {
             subscribe: (parent, args, { pubSub }) => {
-                return pubSub.asyncIterator(EVENTS.TIME_REGISTRY.CREATED);
+                return pubSub.asyncIterator(EVENTS.TIME_ENTRY.CREATED);
             }
         },
     },

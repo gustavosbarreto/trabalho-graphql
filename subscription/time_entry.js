@@ -1,1 +1,1 @@
-export const CREATED = "TIME_REGISTRY_CREATED";
+export const CREATED = "TIME_ENTRY_CREATED";
