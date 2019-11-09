@@ -35,13 +35,6 @@ Quando a aplicação é executada pela primeira vez um usuário administrador in
   * [Enums](#enums)
     * [CacheControlScope](#cachecontrolscope)
     * [Role](#role)
-  * [Scalars](#scalars)
-    * [Boolean](#boolean)
-    * [Date](#date)
-    * [ID](#id)
-    * [Int](#int)
-    * [String](#string)
-    * [Upload](#upload)
 
 </details>
 
