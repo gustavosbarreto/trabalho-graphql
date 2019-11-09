@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "sequelize db:migrate && sequelize db:seed:all && babel-node index.js",
+    "start": "sequelize db:migrate && babel-node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

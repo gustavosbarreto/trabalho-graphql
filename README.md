@@ -14,8 +14,8 @@ Antes de executar o projeto é preciso instalar os módulos do npm:
 ```$ npm install```
 
 Para um funcionamento correto da aplicação é necessário executar o projeto
-com o comando `npm start` para que as migrações e as sementes sejam executadas
-antes de iniciar o servidor GraphQL.
+com o comando `npm start` para que as migrações sejam executadas antes
+de iniciar o servidor GraphQL.
 
 Quando a aplicação é executada pela primeira vez um usuário administrador inicial
 é criado com o email `admin@example.com` e com a senha `admin`.
