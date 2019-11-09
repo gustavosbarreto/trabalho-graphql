@@ -1,7 +1,7 @@
 import dotenv from 'dotenv-defaults';
 import jwt from 'jsonwebtoken';
 import { AuthDirective } from 'graphql-directive-auth';
-import { ForbiddenError, PubSub, ApolloServer } from 'apollo-server';
+import { ForbiddenError, AuthenticationError, PubSub, ApolloServer } from 'apollo-server';
 
 import schema from './schema';
 import models, { sequelize } from './models';
