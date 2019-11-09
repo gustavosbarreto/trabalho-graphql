@@ -22,7 +22,12 @@ Para executar com o Docker execute o seguinte comando:
 $ docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
 ```
 
-# GraphQL Schema
+## Variáveis de ambiente
+
+* `SECRET`: Secret utilizado para assinar o token JWT (default: `secret`)
+* `DB_FILE`: Caminho para o arquivo do banco de dados sqlite (default: `./db.sqlite3`)
+
+## GraphQL Schema
 
 <details>
   <summary><strong>Table of Contents</strong></summary>
@@ -36,6 +41,9 @@ $ docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
     * [User](#user)
   * [Enums](#enums)
     * [Role](#role)
+  * [Directives](#directives)
+    * [isAuthenticated](#isauthenticated)
+    * [hasRole](#hasrole)
 
 </details>
 
@@ -374,3 +382,13 @@ Administrador
 </tr>
 </tbody>
 </table>
+
+## Directives
+
+### isAuthenticated
+
+Garante que somente um usuário autenticado possa executar
+
+### hasRole
+
+Garante que somente um usuário que contenha determinadas `roles` possa acessar
