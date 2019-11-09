@@ -1,10 +1,8 @@
+import config from '../config/config.js';
+
 const Sequelize = require('sequelize');
 
-let sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './db.sqlite3',
-    logging: true
-});
+let sequelize = new Sequelize(config[process.env.NODE_ENV || 'development']);
 
 const models = {
     User: sequelize.import('./user'),

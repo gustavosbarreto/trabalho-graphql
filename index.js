@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import dotenv from 'dotenv-defaults';
 import jwt from 'jsonwebtoken';
 import { AuthDirective } from 'graphql-directive-auth';
 import { ForbiddenError, PubSub, ApolloServer } from 'apollo-server';
@@ -18,6 +18,8 @@ const getUser = async token => {
     }
   }
 };
+
+dotenv.config();
 
 const pubSub = new PubSub();
 
