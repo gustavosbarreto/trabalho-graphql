@@ -4,7 +4,7 @@
 
 Antes de executar o projeto é preciso instalar os módulos do npm:
 
-```npm install```
+```$ npm install```
 
 Para um funcionamento correto da aplicação é necessário executar o projeto
 com o comando `npm start` para que as migrações e as sementes sejam executadas
@@ -19,7 +19,7 @@ O projeto foi containerizado em uma imagem e disponilizado no Docker Hub.
 Para executar com o Docker execute o seguinte comando:
 
 ```
-docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
+$ docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
 ```
 
 # GraphQL Schema
