@@ -6,19 +6,6 @@ Antes de executar o projeto é preciso instalar os módulos do npm:
 
 ```npm install```
 
-Também é necessário definir a variável `SECRET` para assinar os tokens JWT.
-Crie um arquivo `.env` no diretório corrente com o seguinte conteúdo:
-
-```
-SECRET=mysecret
-```
-
-Ou ao executar o projeto defina a variável `SECRET`:
-
-```
-SECRET=mysecret npm start
-```
-
 Para um funcionamento correto da aplicação é necessário executar o projeto
 com o comando `npm start` para que as migrações e as sementes sejam executadas
 antes de iniciar o servidor GraphQL.
@@ -32,7 +19,7 @@ O projeto foi containerizado em uma imagem e disponilizado no Docker Hub.
 Para executar com o Docker execute o seguinte comando:
 
 ```
-docker run -e SECRET=mysecret -p 4000:4000 gustavosbarreto/trabalho-graphql
+docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
 ```
 
 # GraphQL Schema
