@@ -74,7 +74,7 @@ const server = new ApolloServer({
 });
 
 sequelize.sync().then(async () => {
-  server.listen().then((s) => {
+  server.listen({ host: '0.0.0.0', port: 4000 }).then((s) => {
     console.log(`Server listening on port ${s.port}`);
   });
 });
