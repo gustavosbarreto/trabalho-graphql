@@ -99,6 +99,15 @@ Note que somente administradores podem executar essa query
 
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top"><strong>myTimeEntries</strong></td>
+<td valign="top">[<a href="#timeentry">TimeEntry</a>!]</td>
+<td>
+
+Query que retorna todas as bastidades de pontos do usuário corrente
+
+</td>
+</tr>
 </tbody>
 </table>
 

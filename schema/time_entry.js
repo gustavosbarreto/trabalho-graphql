@@ -29,6 +29,10 @@ extend type Query {
     Note que somente administradores podem executar essa query
     """
     timeEntries: [TimeEntry!] @isAuthenticated @hasRole(role: "ADMIN")
+    """
+    Query que retorna todas as bastidades de pontos do usuário corrente
+    """
+    myTimeEntries: [TimeEntry!]
 }
 
 extend type Mutation {

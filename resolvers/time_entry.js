@@ -10,6 +10,11 @@ export default {
     Query: {
         timeEntries: async (parent, args, { models }) => {
             return await models.TimeEntry.findAll();
+        },
+
+        myTimeEntries: async (parent, args, { user, models }) => {
+            const me = await models.User.findById(user.id);
+            return await me.getTimeEntries();
         }
     },
 
