@@ -1,11 +1,17 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import Container from '@material-ui/core/Container';
 import SignIn from './components/SignIn';
+import TimeEntries from './components/TimeEntries';
 
 function App() {
   const httpLink = createHttpLink({
@@ -29,9 +35,12 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Container component="main" maxWidth="xs">
-        <SignIn></SignIn>
-      </Container>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={SignIn} />
+          <Route path="/time_entries" component={TimeEntries} />
+        </Switch>
+      </Router>
     </ApolloProvider>
   );
 }
