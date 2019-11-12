@@ -86,7 +86,7 @@ function SignIn(props) {
           </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/signup" variant="body2">
                                 {"Não tem uma conta? Cadastre-se"}
                             </Link>
                         </Grid>
