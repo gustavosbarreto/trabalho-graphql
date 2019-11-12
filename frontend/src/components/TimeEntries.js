@@ -7,10 +7,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Timestamp from 'react-timestamp';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-    },
+    }
 }));
 
 const TIME_ENTRIES = gql`
@@ -30,19 +29,30 @@ const TIME_ENTRIES = gql`
   }
 `;
 
+const CREATE_TIME_ENTRY = gql`
+  mutation CreateTimeEntry {
+    createTimeEntry {
+        id,
+        createdAt
+    }
+  }
+`;
+
 function TimeEntries() {
     const [timeEntries, setTimeEntries] = useState([]);
     const classes = useStyles();
+
+    const [createTimeEntry] = useMutation(CREATE_TIME_ENTRY, {
+        onCompleted: (data) => {
+            setTimeEntries(timeEntries => [...timeEntries, data.createTimeEntry])
+        }
+    });
 
     useQuery(TIME_ENTRIES, {
         onCompleted: (data) => {
             setTimeEntries(data.timeEntries);
         }
     });
-
-    async function createTimeEntry() {
-        alert(1);
-    }
 
     return (
         <>
@@ -59,7 +69,9 @@ function TimeEntries() {
                         <TableRow key={entry.id}>
                             <TableCell component="th" scope="row">{entry.id}</TableCell>
                             <TableCell align="center"><Timestamp date={entry.createdAt} /></TableCell>
-                            <TableCell align="center">{index % 2 === 0 ? 'Entrada' : 'Saída'}</TableCell>
+                            <TableCell align="center">
+                                {index % 2 === 0 ? (<Chip label="Entrada" color="primary" />) : (<Chip label="Saída" color="secondary" />)}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
