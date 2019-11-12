@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { useQuery, useMutation, useSubscription } from '@apollo/react-hooks';
@@ -73,10 +74,14 @@ const useStyles = makeStyles(theme => ({
         position: 'fixed',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
+    },
+
+    title: {
+        flexGrow: 1
     }
 }));
 
-function TimeEntries() {
+function TimeEntries(props) {
     const [timeEntries, setTimeEntries] = useState([]);
     const [admin, setAdmin] = useState(false);
     const classes = useStyles();
@@ -114,11 +119,17 @@ function TimeEntries() {
         setTimeEntries(timeEntries.filter(entry => entry.id !== id));
     }
 
+    function logout() {
+        localStorage.removeItem('token');
+        props.history.push("/");
+    }
+
     return (
         <>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6">Sistema de Ponto</Typography>
+                    <Typography variant="h6" className={classes.title}>Sistema de Ponto</Typography>
+                    <Button color="inherit" onClick={logout}>Logout</Button>
                 </Toolbar>
             </AppBar>
 

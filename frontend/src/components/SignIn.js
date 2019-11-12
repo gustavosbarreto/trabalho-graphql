@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withApollo } from 'react-apollo';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -28,9 +29,13 @@ function SignIn(props) {
         try {
             const { data } = await signIn({ variables: { email, password } });
             localStorage.setItem('token', data.signIn.token);
+
             setHasError(false);
+
+            props.client.link.subscriptionClient.close(false);
             props.history.push("/time_entries");
         } catch (e) {
+            console.log(e);
             setHasError(true);
         }
     }
@@ -92,4 +97,4 @@ function SignIn(props) {
     )
 }
 
-export default SignIn;
+export default withApollo(SignIn);

@@ -17,6 +17,7 @@ function App() {
     uri: 'ws://localhost:4000/graphql',
     options: {
       reconnect: true,
+      lazy: true,
       connectionParams: () => {
         const token = localStorage.getItem('token');
 
@@ -32,8 +33,18 @@ function App() {
   });
 
   const client = new ApolloClient({
-    link: httpLink,//authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    link: httpLink,
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+      }
+    }
   });
 
   const isAuthenticated = localStorage.getItem('token') !== null;
