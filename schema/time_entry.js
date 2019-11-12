@@ -18,7 +18,7 @@ type TimeEntry {
 extend type Subscription {
     """
     Evento que é disparado quando uma batida é efetuada.
-    Note que somente administradores podem subscrever a este evento
+    Note que somente usuários autenticados podem executar essa query
     """
     timeEntryCreated: TimeEntry @isAuthenticated @hasRole(role: "ADMIN")
 }
@@ -28,11 +28,7 @@ extend type Query {
     Query que retorna todas as batidades de pontos de todos usuários.
     Note que somente administradores podem executar essa query
     """
-    timeEntries: [TimeEntry!] @isAuthenticated @hasRole(role: "ADMIN")
-    """
-    Query que retorna todas as bastidades de pontos do usuário corrente
-    """
-    myTimeEntries: [TimeEntry!]
+    timeEntries: [TimeEntry!] @isAuthenticated
 }
 
 extend type Mutation {

@@ -8,13 +8,13 @@ export default {
     },
 
     Query: {
-        timeEntries: async (parent, args, { models }) => {
-            return await models.TimeEntry.findAll();
-        },
-
-        myTimeEntries: async (parent, args, { user, models }) => {
-            const me = await models.User.findById(user.id);
-            return await me.getTimeEntries();
+        timeEntries: async (parent, args, { user, models }) => {
+            if (user.role == 'ADMIN') {
+                return await models.TimeEntry.findAll({ include: [{ model: models.User }] });
+            } else {
+                const me = await models.User.findById(user.id);
+                return await me.getTimeEntries({ include: [{ model: models.User }] });
+            }
         }
     },
 
