@@ -57,15 +57,15 @@ const DELETE_TIME_ENTRY = gql`
 `;
 
 const TIME_ENTRY_CREATED = gql`
-  subscription TimeEntryCreated {
-    timeEntryCreated {
-      id,
-      createdAt,
-      user {
-        name
-      }
+subscription {
+  timeEntryCreated {
+    id,
+    createdAt,
+    user {
+      name
     }
   }
+}
 `;
 
 const useStyles = makeStyles(theme => ({
@@ -83,13 +83,15 @@ function TimeEntries() {
 
     const [createTimeEntry] = useMutation(CREATE_TIME_ENTRY, {
         onCompleted: (data) => {
-            setTimeEntries(timeEntries => [...timeEntries, data.createTimeEntry])
+            if (!admin) {
+                setTimeEntries(timeEntries => [...timeEntries, data.createTimeEntry])
+            }
         }
     });
 
     const [deleteTimeEntry] = useMutation(DELETE_TIME_ENTRY);
 
-    const { updateQuery } = useQuery(TIME_ENTRIES, {
+    useQuery(TIME_ENTRIES, {
         onCompleted: (data) => {
             setTimeEntries(data.timeEntries);
         }
@@ -98,6 +100,12 @@ function TimeEntries() {
     useQuery(CURRENT_USER, {
         onCompleted: (data) => {
             setAdmin(data.currentUser.role === "ADMIN");
+        }
+    });
+
+    useSubscription(TIME_ENTRY_CREATED, {
+        onSubscriptionData: data => {
+            setTimeEntries(timeEntries => [...timeEntries, data.subscriptionData.data.timeEntryCreated])
         }
     });
 
