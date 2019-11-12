@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -36,12 +36,18 @@ function App() {
     cache: new InMemoryCache()
   });
 
+  const isAuthenticated = localStorage.getItem('token') !== null;
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <Switch>
           <Route exact path="/" component={SignIn} />
-          <Route path="/time_entries" component={TimeEntries} />
+          <Route path="/time_entries" render={props => isAuthenticated ? (
+            <TimeEntries {...props} />)
+            : (
+              <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+            )} />
         </Switch>
       </Router>
     </ApolloProvider>

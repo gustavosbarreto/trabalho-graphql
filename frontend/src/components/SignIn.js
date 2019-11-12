@@ -4,16 +4,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-
-const CURRENT_USER = gql`
-  {
-    currentUser {
-        name
-    }
-  }
-`;
 
 const SIGNIN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -23,12 +15,11 @@ const SIGNIN = gql`
   }
 `;
 
-function SignIn() {
+function SignIn(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hasError, setHasError] = useState(false);
 
-    //const { loading, error, data } = useQuery(CURRENT_USER);
     const [signIn] = useMutation(SIGNIN);
 
     async function onSubmit(e) {
@@ -38,6 +29,7 @@ function SignIn() {
             const { data } = await signIn({ variables: { email, password } });
             localStorage.setItem('token', data.signIn.token);
             setHasError(false);
+            props.history.push("/time_entries");
         } catch (e) {
             setHasError(true);
         }
