@@ -14,3 +14,14 @@ Trabalho desenvolvido com as seguintes tecnologias:
 ## Executando
 
 Veja o README de cada módulo para as instruções
+
+## Executando com Docker
+
+Na raíz do projeto basta executar:
+
+```
+$ docker-compose up
+```
+
+Em alguns minutos a aplicação estará rodando em: (http://localhost:3000))
+
