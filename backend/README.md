@@ -13,15 +13,6 @@ de iniciar o servidor GraphQL.
 Quando a aplicação é executada pela primeira vez um usuário administrador inicial
 é criado com o email `admin@example.com` e com a senha `admin`.
 
-## Executando com Docker
-
-O projeto foi containerizado em uma imagem e disponilizado no Docker Hub.
-Para executar com o Docker execute o seguinte comando:
-
-```
-$ docker run -p 4000:4000 gustavosbarreto/trabalho-graphql
-```
-
 ## Variáveis de ambiente
 
 * `SECRET`: Secret utilizado para assinar o token JWT (default: `secret`)

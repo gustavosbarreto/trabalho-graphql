@@ -13,10 +13,6 @@ Trabalho desenvolvido com as seguintes tecnologias:
 
 ## Executando
 
-Veja o README de cada módulo para as instruções
-
-## Executando com Docker
-
 Na raíz do projeto basta executar:
 
 ```
