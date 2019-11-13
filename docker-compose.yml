@@ -4,6 +4,10 @@ services:
   backend:
     build:
       context: backend
+    environment:
+      DB_FILE: /data/db.sqlite3
+    volumes:
+      - ${PWD}:/data
     ports:
       - "4000:4000"
   frontend:
