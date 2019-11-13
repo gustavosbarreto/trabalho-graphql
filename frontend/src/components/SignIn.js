@@ -28,12 +28,11 @@ function SignIn(props) {
 
         try {
             const { data } = await signIn({ variables: { email, password } });
-            localStorage.setItem('token', data.signIn.token);
+            await localStorage.setItem('token', data.signIn.token);
 
             setHasError(false);
 
-            props.client.link.subscriptionClient.close(false);
-            props.history.push("/time_entries");
+            window.location.href = '/time_entries'
         } catch (e) {
             console.log(e);
             setHasError(true);
