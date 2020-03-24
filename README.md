@@ -20,4 +20,3 @@ $ docker-compose up
 ```
 
 Em alguns minutos a aplicação estará rodando em: (http://localhost:3000))
-
