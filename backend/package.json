@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.9.7",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "dotenv-defaults": "^1.0.2",
     "express": "^4.17.1",
